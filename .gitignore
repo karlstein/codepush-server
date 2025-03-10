@@ -1,0 +1,13 @@
+.idea/*
+
+.git/*
+
+bin
+deployment
+
+
+# !config/env/.env
+# Makefile
+
+*.tar.gz
+.env
