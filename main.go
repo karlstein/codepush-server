@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	loadEnv()
+	loadEnv("")
 	initDB()
 	initS3()
 

@@ -4,11 +4,14 @@ go 1.23.0
 
 toolchain go1.23.7
 
-require github.com/gin-gonic/gin v1.10.0
+require (
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.62
+	github.com/gin-gonic/gin v1.10.0
+	gorm.io/gorm v1.25.10
+)
 
 require (
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.10 // indirect
-	github.com/aws/aws-sdk-go-v2/credentials v1.17.62 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.30 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.34 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.34 // indirect
@@ -28,8 +31,9 @@ require (
 	github.com/jackc/puddle/v2 v2.2.1 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
+	github.com/kr/text v0.2.0 // indirect
+	github.com/rogpeppe/go-internal v1.14.1 // indirect
 	golang.org/x/sync v0.12.0 // indirect
-	gorm.io/gorm v1.25.10 // indirect
 )
 
 require (
