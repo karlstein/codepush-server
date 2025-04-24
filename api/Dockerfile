@@ -12,6 +12,6 @@ RUN CGO_ENABLED=0 go build -ldflags '-extldflags "-static"' -o /codepush-server
 FROM gcr.io/distroless/static-debian12
 WORKDIR /
 COPY --from=build /codepush-server /codepush-server
-COPY /.env /.env
+COPY ../.env /.env
 
 ENTRYPOINT ["./codepush-server", "--env-path", ".env"]

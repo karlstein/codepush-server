@@ -14,7 +14,7 @@ export const login = (
 ): Promise<SuccessResponseType<LoginModel, LoginModel>> =>
   httpClient.post("/login", payload);
 
-export const setCookie = (token: string, hostname: string): Promise<unknown> =>
+export const setCookie = (token: string, hostname: string): Promise<Response> =>
   fetch(`${hostname}/api/set-cookie`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },

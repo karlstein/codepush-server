@@ -66,12 +66,14 @@ export type DeploymentKeyModel = GormModel & {
   project: ProjectModel;
 };
 
-export interface SuccessResponseType<T, D = any> extends AxiosResponse {
-  data: {
-    data: T;
-    message?: string;
-    status: number;
-  };
+export type ResponseDataType<T> = {
+  data: T;
+  message?: string;
+  status: number;
+};
+
+export interface SuccessResponseType<T, D = unknown> extends AxiosResponse {
+  data: ResponseDataType<T>;
   config: InternalAxiosRequestConfig<D>;
 }
 
@@ -101,3 +103,11 @@ export type GenerateDeploymentKeyPayloadModel = Omit<
   DeploymentKeyModel,
   "key" | "userId" | "user" | "project"
 >;
+
+export type TokenModel = {
+  user_id: number;
+  provider_access_token: string;
+  exp: number;
+};
+
+export type ErrorModel = { message: string; status: number } | string;

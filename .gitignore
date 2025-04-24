@@ -11,3 +11,4 @@ deployment
 
 *.tar.gz
 .env
+.env.local

@@ -1,6 +1,7 @@
 // app/api/set-cookie/route.ts
 import { NextRequest, NextResponse } from "next/server";
 import { jwtDecode } from "jwt-decode";
+import { ErrorModel, TokenModel } from "@/types";
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,7 +12,7 @@ export async function POST(request: NextRequest) {
       throw { status: 400, message: "token is required" };
     }
 
-    const decoded = jwtDecode<any>(token);
+    const decoded = jwtDecode<TokenModel>(token);
     const unix = new Date().getTime() / 1000;
 
     if (decoded.exp < unix) {
@@ -32,10 +33,18 @@ export async function POST(request: NextRequest) {
     });
 
     return response;
-  } catch (error: any) {
+  } catch (error) {
+    const newErr: ErrorModel = error as ErrorModel;
+
+    if (typeof newErr === "string")
+      return NextResponse.json(
+        { error: newErr },
+        { status: 500, statusText: newErr }
+      );
+
     return NextResponse.json(
-      { error: error.message || error },
-      { status: error.status || 500, statusText: error.message || error } // Bad Request
+      { error: newErr.message },
+      { status: newErr.status, statusText: newErr.message } // Bad Request
     );
   }
 }

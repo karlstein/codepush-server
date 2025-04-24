@@ -20,23 +20,24 @@ const GenerateKeyModal = (props: GenerateKeyModalProps) => {
   const [deploymentKey, setDeploymentKey] = useState("");
   const [copySuccess, setCopySuccess] = useState(false);
 
-  const handleInputChange = (e: any) => {
-    const { name, value, type, checked } = e.target;
+  const handleInputChange: React.ChangeEventHandler<
+    HTMLInputElement | HTMLSelectElement
+  > = (e) => {
+    const { name, value, type } = e.target;
     console.log(
       "\u231B cp-server - handleInputChange - e.target",
       name,
       value,
-      type,
-      checked
+      type
     );
 
     setFormData({
       ...formData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? e.target.checked : value,
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     try {
@@ -46,7 +47,7 @@ const GenerateKeyModal = (props: GenerateKeyModalProps) => {
       generateDeploymentKey(formData).then((res) =>
         setDeploymentKey(res.data.data.key)
       );
-    } catch (error: any) {
+    } catch (error) {
       console.error("\u231B cp-server - handleSubmit - error", error);
       toast(`Something wrong! ${error}`);
     }

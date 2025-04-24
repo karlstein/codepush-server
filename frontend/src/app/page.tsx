@@ -85,57 +85,57 @@ const Page = () => {
 
 export default Page;
 
-const LoginForms = () => {
-  return (
-    <Fragment>
-      <div className="flex flex-col gap-2">
-        <label htmlFor="email" className="text-sm text-secondary-text">
-          Email
-        </label>
-        <input
-          type="email"
-          id="email"
-          className="p-3 bg-white/5 border border-white/10 rounded-md text-white text-base transition-all focus:outline-none focus:border-accent focus:shadow-[0_0_0_2px_rgba(78,205,196,0.2)]"
-          placeholder="Enter your email"
-        />
-      </div>
+// const LoginForms = () => {
+//   return (
+//     <Fragment>
+//       <div className="flex flex-col gap-2">
+//         <label htmlFor="email" className="text-sm text-secondary-text">
+//           Email
+//         </label>
+//         <input
+//           type="email"
+//           id="email"
+//           className="p-3 bg-white/5 border border-white/10 rounded-md text-white text-base transition-all focus:outline-none focus:border-accent focus:shadow-[0_0_0_2px_rgba(78,205,196,0.2)]"
+//           placeholder="Enter your email"
+//         />
+//       </div>
 
-      <div className="flex flex-col gap-2">
-        <label htmlFor="password" className="text-sm text-secondary-text">
-          Password
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="p-3 bg-white/5 border border-white/10 rounded-md text-white text-base transition-all focus:outline-none focus:border-accent focus:shadow-[0_0_0_2px_rgba(78,205,196,0.2)]"
-          placeholder="Enter your password"
-        />
-      </div>
+//       <div className="flex flex-col gap-2">
+//         <label htmlFor="password" className="text-sm text-secondary-text">
+//           Password
+//         </label>
+//         <input
+//           type="password"
+//           id="password"
+//           className="p-3 bg-white/5 border border-white/10 rounded-md text-white text-base transition-all focus:outline-none focus:border-accent focus:shadow-[0_0_0_2px_rgba(78,205,196,0.2)]"
+//           placeholder="Enter your password"
+//         />
+//       </div>
 
-      <div className="flex justify-between text-sm">
-        <label className="flex items-center gap-2">
-          <input type="checkbox" className="rounded" /> Remember me
-        </label>
-        <a
-          href="#"
-          className="text-secondary-text no-underline hover:text-accent transition-colors"
-        >
-          Forgot password?
-        </a>
-      </div>
+//       <div className="flex justify-between text-sm">
+//         <label className="flex items-center gap-2">
+//           <input type="checkbox" className="rounded" /> Remember me
+//         </label>
+//         <a
+//           href="#"
+//           className="text-secondary-text no-underline hover:text-accent transition-colors"
+//         >
+//           Forgot password?
+//         </a>
+//       </div>
 
-      <button
-        type="button"
-        className="bg-accent text-bg-dark p-3 border-none rounded-md font-semibold cursor-pointer transition-all mt-4 hover:bg-[#3db9b0]"
-      >
-        Sign In
-      </button>
+//       <button
+//         type="button"
+//         className="bg-accent text-bg-dark p-3 border-none rounded-md font-semibold cursor-pointer transition-all mt-4 hover:bg-[#3db9b0]"
+//       >
+//         Sign In
+//       </button>
 
-      <div className="flex items-center my-6 text-secondary-text">
-        <div className="flex-grow h-px bg-white/10"></div>
-        <div className="px-4 text-sm">OR</div>
-        <div className="flex-grow h-px bg-white/10"></div>
-      </div>
-    </Fragment>
-  );
-};
+//       <div className="flex items-center my-6 text-secondary-text">
+//         <div className="flex-grow h-px bg-white/10"></div>
+//         <div className="px-4 text-sm">OR</div>
+//         <div className="flex-grow h-px bg-white/10"></div>
+//       </div>
+//     </Fragment>
+//   );
+// };

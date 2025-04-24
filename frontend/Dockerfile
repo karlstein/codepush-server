@@ -12,6 +12,7 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package-lock.json ./
+COPY @types ./@types
 COPY public ./public
 COPY src ./src
 COPY ./.env ./.env

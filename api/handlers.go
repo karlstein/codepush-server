@@ -148,11 +148,7 @@ type LoginModel struct {
 func userLogin(c *gin.Context) {
 	var login LoginModel
 
-	fmt.Println("userLogin")
-
 	if err := c.ShouldBindJSON(&login); err != nil {
-		fmt.Println("userLogin - err", err)
-
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

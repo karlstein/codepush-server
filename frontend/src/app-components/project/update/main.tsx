@@ -44,7 +44,9 @@ const ProjectUpdateMain = (props: UpdateListPageProps) => {
       setParams((state) => ({ ...state, projectID: projectDummy?.id || 0 }));
     } catch (error) {
       console.error("\u231B cp-server - main - error", error);
-      toast(`Something wrong! ${error as any}`, { type: "error" });
+      toast(`Something wrong! ${typeof error === "string" ? error : "---"}`, {
+        type: "error",
+      });
       projectDummy = null;
     }
 
@@ -62,7 +64,7 @@ const ProjectUpdateMain = (props: UpdateListPageProps) => {
         setProjectUpdates(res.data.data);
       });
     }
-  }, [params, getProjectUpdates]);
+  }, [params]);
 
   const renderModal = () => {
     return (

@@ -1,14 +1,11 @@
 .SILENT: build
 build:
-ifndef BE_VERSION
-	@docker build -t codepush-server/api -f api/Dockerfile --platform=linux/amd64 api/
+ifdef ISLOCAL
+	@echo Build docker with .env.local
+	@bash ./scripts/docker-build.sh ./.env.local
 else
-	@docker build -t codepush-server/api:$(BE_VERSION) -f Dockerfile --platform=linux/amd64 api/
-endif
-ifndef FE_VERSION
-	@docker build -t codepush-server/fe -f frontend/Dockerfile --platform=linux/amd64 frontend/
-else
-	@docker build -t codepush-server/fe:$(FE_VERSION) -f Dockerfile --platform=linux/amd64 frontend/
+	@echo Build docker with .env
+	@bash ./scripts/docker-build.sh ./.env
 endif
 
 .SILENT: build-server
@@ -25,10 +22,10 @@ run-server:
 build-all:
 ifeq ($(ENV),)
 	@echo run local build script
-	@bash ./scripts/local-build.sh ./.env
+	@bash ./scripts/local-build.sh ./.env.local
 else ifeq ($(ENV),LOCAL)
 	@echo run local build script
-	@bash ./scripts/local-build.sh ./.env
+	@bash ./scripts/local-build.sh ./.env.local
 else ifeq ($(ENV),DEV)
 	@echo run dev build script
 	@bash ./scripts/dev-build.sh ./.env

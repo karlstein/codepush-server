@@ -4,14 +4,12 @@ import Link from "next/link";
 
 interface CustomLinkProps extends React.LinkHTMLAttributes<HTMLAnchorElement> {
   href: string;
-  disabled?: boolean;
 }
 
 const CustomLink = ({
   href,
   children,
   className,
-  disabled,
   ...rest
 }: CustomLinkProps) => {
   const isInternalLink = href.startsWith("/");

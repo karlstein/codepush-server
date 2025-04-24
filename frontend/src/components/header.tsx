@@ -26,7 +26,7 @@ const Header = (props: HeaderProps) => {
 
   const setAuthTokenCookie = (token: string) => {
     setCookie(token, hostnameCookie?.value || "http://localhost:3004")
-      .then((res: any) => {
+      .then((res) => {
         if (res.status !== 200) throw res;
       })
       .catch((err) => {
@@ -48,7 +48,7 @@ const Header = (props: HeaderProps) => {
 
       setSession({ loading: false, data });
     });
-  }, []);
+  }, [authTokenCookie?.value]);
 
   useEffect(() => {
     if (!session.loading && !session.data) {
