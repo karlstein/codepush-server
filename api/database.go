@@ -30,7 +30,7 @@ func initDB() {
 	}
 
 	// Auto-migrate schema
-	if err := db.AutoMigrate(&Update{}); err != nil {
+	if err := db.AutoMigrate(&Update{}, &DeploymentKey{}, &Team{}); err != nil {
 		log.Fatalf("❌ Failed to migrate database: %v", err)
 	}
 

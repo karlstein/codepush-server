@@ -13,9 +13,10 @@ func main() {
 	initS3()
 
 	router := gin.Default()
+	router.Use(CORSMiddleware())
 	setupRoutes(router)
 
-	port := getEnv("SERVER_PORT", "8080")
+	port := getEnv("SERVER_API_PORT", "8080")
 	log.Printf("🚀 CodePush server running on port %s", port)
 
 	if err := router.Run(fmt.Sprintf(":%s", port)); err != nil {
