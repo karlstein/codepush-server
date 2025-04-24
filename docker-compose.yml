@@ -19,6 +19,8 @@ services:
       S3_ACCESS_KEY: ${S3_ACCESS_KEY}
       S3_SECRET_KEY: ${S3_SECRET_KEY}
       SERVER_API_PORT: ${SERVER_API_PORT}
+    networks:
+      - development
 
   codepush_server_fe:
     image: codepush-server/fe:${FE_VERSION}
@@ -27,4 +29,11 @@ services:
     build: ./frontend
     ports:
       - "${SERVER_FE_PORT}:${SERVER_FE_PORT}"
+    networks:
+      - development
 
+
+networks:
+  development:
+    name: development
+    driver: bridge
