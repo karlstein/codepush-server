@@ -41,10 +41,10 @@ endif
 run-fe:
 ifeq ($(ENV),)
 	@echo run local run-fe script
-	@bash ./scripts/local-run-fe.sh ./.env
+	@bash ./scripts/local-run-fe.sh ./.env.local
 else ifeq ($(ENV),LOCAL)
 	@echo run local run-fe script
-	@bash ./scripts/local-run-fe.sh ./.env
+	@bash ./scripts/local-run-fe.sh ./.env.local
 else ifeq ($(ENV),DEV)
 	@echo run dev run-fe script
 	@bash ./scripts/dev-run-fe.sh ./.env
