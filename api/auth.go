@@ -96,7 +96,7 @@ func CORSMiddleware() gin.HandlerFunc {
 	fmt.Println("CORSMiddleware - origin", origin)
 
 	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", origin)
+		c.Header("Access-Control-Allow-Origin", "https://cp-center.kemal-adiatna.my.id")
 		c.Header("Access-Control-Allow-Credentials", "true")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Accept")
 		c.Header("Access-Control-Allow-Methods", "POST, HEAD, PATCH, DELETE, OPTIONS, GET, PUT")
