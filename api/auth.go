@@ -91,8 +91,12 @@ func getReqInfo(c *gin.Context) RequestInfo {
 }
 
 func CORSMiddleware() gin.HandlerFunc {
+	origin := getEnv("NEXTAUTH_URL", "http://localhost:3004")
+
+	fmt.Println("CORSMiddleware - origin", origin)
+
 	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", getEnv("NEXTAUTH_URL", "http://localhost:3004"))
+		c.Header("Access-Control-Allow-Origin", origin)
 		c.Header("Access-Control-Allow-Credentials", "true")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Accept")
 		c.Header("Access-Control-Allow-Methods", "POST, HEAD, PATCH, DELETE, OPTIONS, GET, PUT")
