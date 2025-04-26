@@ -33,6 +33,10 @@ const ProjectUpdateMain = (props: UpdateListPageProps) => {
     let projectDummy: ProjectModel | null = null;
 
     try {
+      console.log(
+        "\u231B cp-server - main - propParams.project",
+        propParams.project
+      );
       if (!propParams.project) throw "Project undefined";
       projectDummy = JSON.parse(
         Buffer.from(
