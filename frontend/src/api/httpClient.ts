@@ -22,7 +22,7 @@ export const httpClient = axios.create({
 
 httpClient.interceptors.response.use(
   async (response) => {
-    console.error("cp-server - interceptors - response", response);
+    console.log("cp-server - interceptors - response", response);
     return Promise.resolve(response);
   },
   async (error) => {

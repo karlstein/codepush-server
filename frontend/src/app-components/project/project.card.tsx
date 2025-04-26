@@ -16,6 +16,10 @@ const ProjectCard = (props: ProjectCardProps) => {
   } border border-gray-800 rounded-tl-lg rounded-br-lg flex overflow-hidden shadow-md hover:shadow-lg transition-shadow`;
 
   const base64Project = Buffer.from(JSON.stringify(project)).toString("base64");
+
+  console.log("cp-server - ProjectCard - project", project);
+  console.log("cp-server - ProjectCard - base64Project", base64Project);
+
   const renderContainer = (children: ReactNode) => {
     if (disabled) return <div className={className}>{children}</div>;
 
