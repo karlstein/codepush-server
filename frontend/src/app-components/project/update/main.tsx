@@ -33,17 +33,9 @@ const ProjectUpdateMain = (props: UpdateListPageProps) => {
     let projectDummy: ProjectModel | null = null;
 
     try {
-      console.log(
-        "\u231B cp-server - main - propParams.project",
-        propParams.project
-      );
+      const repProj = propParams.project.replaceAll(/(%3D)|=/g, "");
       if (!propParams.project) throw "Project undefined";
-      projectDummy = JSON.parse(
-        Buffer.from(
-          propParams.project.substring(0, propParams.project.length - 4),
-          "base64"
-        ).toString()
-      );
+      projectDummy = JSON.parse(Buffer.from(repProj, "base64").toString());
       console.log("\u231B cp-server - main - projectDummy", projectDummy);
       setParams((state) => ({ ...state, projectID: projectDummy?.id || 0 }));
     } catch (error) {
