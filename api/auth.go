@@ -7,6 +7,7 @@ import (
 
 	"maps"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -95,17 +96,24 @@ func CORSMiddleware() gin.HandlerFunc {
 
 	fmt.Println("CORSMiddleware - origin", origin)
 
-	return func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "http://localhost:3004")
-		c.Header("Access-Control-Allow-Credentials", "true")
-		c.Header("Access-Control-Allow-Headers", "Content-Type, Accept")
-		c.Header("Access-Control-Allow-Methods", "POST, HEAD, PATCH, DELETE, OPTIONS, GET, PUT")
-
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(204)
-			return
-		}
-
-		c.Next()
+	config := cors.Config{
+		AllowOrigins:     []string{origin},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept", "Authorization"},
+		ExposeHeaders:    []string{"Set-Cookie"}, // Expose Set-Cookie to the frontend
+		AllowCredentials: true,
 	}
+
+	// return func(c *gin.Context) {
+	// 	c.Header("Access-Control-Allow-Origin", "http://localhost:3004")
+	// 	c.Header("Access-Control-Allow-Credentials", "true")
+	// 	c.Header("Access-Control-Allow-Headers", "Content-Type, Accept")
+	// 	c.Header("Access-Control-Allow-Methods", "POST, HEAD, PATCH, DELETE, OPTIONS, GET, PUT")
+
+	// 	if c.Request.Method == "OPTIONS" {
+	// 		c.AbortWithStatus(204)
+	// 		return
+	// 	}
+
+	return cors.New(config)
 }

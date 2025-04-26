@@ -29,6 +29,7 @@ export async function POST(request: NextRequest) {
       secure: true,
       path: "/",
       sameSite: "none",
+      domain: process.env.NEXT_PUBLIC_BASE_URL,
       maxAge: 60 * 60 * 24, // 1 day
     });
 
