@@ -40,6 +40,8 @@ export async function POST(request: NextRequest) {
       option.secure = true;
     }
 
+    console.log("set-cookie - option", option);
+
     response.cookies.set("auth_token", token, option);
 
     return response;
