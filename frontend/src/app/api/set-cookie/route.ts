@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { jwtDecode } from "jwt-decode";
 import { ErrorModel, TokenModel } from "@/types";
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,19 +20,27 @@ export async function POST(request: NextRequest) {
       throw { status: 400, message: "token is expired" };
     }
 
-    const response = NextResponse.json({ message: `Cookie set` });
+    const response = NextResponse.json({ message: `Cookie-Set` });
     const authToken = response.cookies.get("auth_token");
 
-    if (authToken) return response;
+    if (authToken)
+      return NextResponse.json({ message: `Cookie 'auth_token' already set` });
 
-    response.cookies.set("auth_token", token, {
+    const option: Partial<ResponseCookie> = {
       httpOnly: true,
-      secure: true,
+      secure: false,
       path: "/",
-      sameSite: "none",
-      domain: process.env.NEXT_PUBLIC_BASE_URL,
+      sameSite: "lax",
       maxAge: 60 * 60 * 24, // 1 day
-    });
+    };
+
+    if (process.env.NODE_ENV === "production") {
+      option.domain = process.env.NEXT_PUBLIC_BASE_URL;
+      option.sameSite = "none";
+      option.secure = true;
+    }
+
+    response.cookies.set("auth_token", token, option);
 
     return response;
   } catch (error) {

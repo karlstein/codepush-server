@@ -94,8 +94,6 @@ func getReqInfo(c *gin.Context) RequestInfo {
 func CORSMiddleware() gin.HandlerFunc {
 	origin := getEnv("NEXTAUTH_URL", "http://localhost:3004")
 
-	fmt.Println("CORSMiddleware - origin", origin)
-
 	config := cors.Config{
 		AllowOrigins:     []string{origin},
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},

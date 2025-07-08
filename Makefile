@@ -22,10 +22,10 @@ run-server:
 build-all:
 ifeq ($(ENV),)
 	@echo run local build script
-	@bash ./scripts/local-build.sh ./.env.local
+	@bash ./scripts/local-build-all.sh ./.env.local
 else ifeq ($(ENV),LOCAL)
 	@echo run local build script
-	@bash ./scripts/local-build.sh ./.env.local
+	@bash ./scripts/local-build-all.sh ./.env.local
 else ifeq ($(ENV),DEV)
 	@echo run dev build script
 	@bash ./scripts/dev-build.sh ./.env
