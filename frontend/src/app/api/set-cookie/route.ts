@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({ message: `Cookie-Set` });
     const authToken = response.cookies.get("auth_token");
 
-    console.info("set-cookie - authToken", authToken);
+    console.error("set-cookie - authToken", authToken);
 
     if (authToken)
       return NextResponse.json({ message: `Cookie 'auth_token' already set` });
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       option.secure = true;
     }
 
-    console.info("set-cookie - option", option);
+    console.error("set-cookie - option", option);
 
     response.cookies.set("auth_token", token, option);
 
