@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
     const response = NextResponse.json({ message: `Cookie-Set` });
     const authToken = response.cookies.get("auth_token");
 
-    console.error("set-cookie - authToken", authToken);
+    console.info("set-cookie - authToken", authToken);
 
     if (authToken)
       return NextResponse.json({ message: `Cookie 'auth_token' already set` });
@@ -37,12 +37,12 @@ export async function POST(request: NextRequest) {
     };
 
     if (process.env.NODE_ENV === "production") {
-      option.domain = process.env.NEXT_PUBLIC_BASE_URL;
+      option.domain = process.env.NEXT_PUBLIC_DOMAIN;
       option.sameSite = "none";
       option.secure = true;
     }
 
-    console.error("set-cookie - option", option);
+    console.info("set-cookie - option", option);
 
     response.cookies.set("auth_token", token, option);
 
