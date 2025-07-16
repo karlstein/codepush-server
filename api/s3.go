@@ -13,8 +13,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
-	"github.com/schollz/progressbar/v3"
+	s3Types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // S3 Client
@@ -50,7 +49,7 @@ func DownloadFile(bundleName string) (*s3.GetObjectOutput, error) {
 	})
 
 	if err != nil {
-		var noKey *types.NoSuchKey
+		var noKey *s3Types.NoSuchKey
 		if errors.As(err, &noKey) {
 			log.Printf("Can't get object %s from bucket %s. No such key exists.\n", bundleName, s3Bucket)
 			err = noKey
@@ -71,18 +70,19 @@ func UploadFile(file multipart.File, handler *multipart.FileHeader, fileName str
 		return err
 	}
 
-	stat, err := getFileStat(handler)
+	data, err := io.ReadAll(buffer)
 	if err != nil {
 		return err
 	}
 
-	bar := progressbar.DefaultBytes(stat.Size, "Uploading")
-	progressReader := progressbar.NewReader(file, bar)
+	seekableReader := bytes.NewReader(data)
 
 	_, err = s3Client.PutObject(context.TODO(), &s3.PutObjectInput{
-		Bucket: aws.String(getEnv("S3_BUCKET", "code-push")),
-		Key:    aws.String(fileName),
-		Body:   progressReader.Reader, // Now correctly implements io.Reader
+		Bucket:            aws.String(getEnv("S3_BUCKET", "code-push")),
+		ACL:               "public-read",
+		Key:               aws.String(fileName),
+		Body:              seekableReader,
+		ChecksumAlgorithm: s3Types.ChecksumAlgorithmSha256,
 	})
 	if err != nil {
 		return err
